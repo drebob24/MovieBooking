@@ -6,6 +6,8 @@ Add Functionaly for 2 Level's of Access:
 
 #### Create New Screenings:
 
+Will Require a new Screening Table
+
 - Input: Date & Time of the Screening (Timestamp), Movie ID, Ticket Count
 - Constraints:
   - DateTime: Future Date, Timestamp Format
@@ -22,6 +24,34 @@ Add Functionaly for 2 Level's of Access:
 ### Change Screening Size (Optional)
 
 -Constraints: Ticket Amount >= Reserved Tickets
+
+### 2. Users:
+
+#### Look Up Movies:
+
+- Input: List of movie id's (/movies?id=1,2,3)
+- Action: Return All from Movie DB for provided IDs
+- Output: List of Movie Titles and Year for Each ID.
+
+#### Look Up Screenings:
+
+- Input: None/ID
+- Action: Return Lists from Screening Table
+- Output: List of Screenings with Movie Title, Year, Time, Tickets, Tickets Left/Reserved
+
+#### Reserve Ticket:
+
+Will Require a Reservations Table and Users Table
+
+- Input: Screening ID or Movie Title + Screening Time
+- Action: Verify Tickets Available, Add Record to Reservations Table, tied to User's ID
+- Output: Confirmation with Ticket Count, Movie Info, and Screening Time
+
+#### Look Up Tickets:
+
+- Input: User ID
+- Action: Grab data from Reservations Table for given User ID
+- Output: List of Ticket Reservations
 
 ## Setup
 
