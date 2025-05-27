@@ -17,11 +17,11 @@ Will Require a new Screening Table
 - Action: Create DB record in Screening Table: id, movie_id, tickets, reservations, time
 - Output: Created Successfully Message + Screening ID
 
-### Delete Empty Screening (Optional)
+#### Delete Empty Screening (Optional)
 
 -Constraints: Reserved Tickets = 0
 
-### Change Screening Size (Optional)
+#### Change Screening Size (Optional)
 
 -Constraints: Ticket Amount >= Reserved Tickets
 
