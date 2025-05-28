@@ -6,16 +6,16 @@ Add Functionaly for 2 Level's of Access:
 
 #### Create New Screenings:
 
-~Will Require a new Screening Table~
+- [x] Will Require a new Screening Table 
 
-~- Input: Date & Time of the Screening (Timestamp), Movie ID, Ticket Count~
-~- Constraints:~
-~  - DateTime: Future Date, Timestamp Format~
-~  - Movide ID: must exist in DB~
-~  - Ticket Count: > 0 and < 200 (let's assume a medium sized theater)~
+- [x] - Input: Date & Time of the Screening (Timestamp), Movie ID, Ticket Count
+- [x] - Constraints:
+  - [x] - DateTime: Future Date, Timestamp Format
+  - [x] - Movide ID: must exist in DB
+  - [x] - Ticket Count: > 0 and < 200 (let's assume a medium sized theater)
   - Bonus Constraint: Limit of screenings for show times (could use like 2hr showtime length since the db doesn't have movie lengths)
-~- Action: Create DB record in Screening Table: id, movie_id, tickets, reservations (to be handled seperately), time~
-- Output: Created Successfully Message + Screening ID : Currently Returns a 201 Status and the new Entry as a JSON
+- [x] - Action: Create DB record in Screening Table: id, movie_id, tickets, reservations (to be handled seperately), time
+- [x] - Output: Created Successfully Message + Screening ID : Currently Returns a 201 Status and the new Entry as a JSON
 
 #### Delete Empty Screening (Optional)
 
