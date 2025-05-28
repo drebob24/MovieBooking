@@ -6,7 +6,7 @@ Add Functionaly for 2 Level's of Access:
 
 #### Create New Screenings:
 
-Will Require a new Screening Table
+~Will Require a new Screening Table~
 
 - Input: Date & Time of the Screening (Timestamp), Movie ID, Ticket Count
 - Constraints:
