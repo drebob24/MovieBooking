@@ -13,15 +13,16 @@ afterEach(async () => {
   await db.deleteFrom('screenings').execute()
 })
 
-describe('createNew', () => {
+describe('createNew', async () => {
+  await createMovies([
+    {
+      id: 1,
+      title: 'Sherlock Holmes',
+      year: 2009,
+    },
+  ])
+
   it('should create a new record in the screenings table', async () => {
-    await createMovies([
-      {
-        id: 1,
-        title: 'Sherlock Holmes',
-        year: 2009,
-      },
-    ])
     const screening = {
       date: Date.now(),
       movieId: 1,
@@ -33,5 +34,15 @@ describe('createNew', () => {
       id: expect.any(Number),
       ...screening,
     })
+  })
+
+  it('should reject screening with invalid movieId', async () => {
+    const screening = {
+      date: Date.now(),
+      movieId: 5,
+      seats: 150,
+    }
+
+    expect(repository.createNew(screening)).rejects.toThrow()
   })
 })
