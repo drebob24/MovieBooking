@@ -27,11 +27,11 @@ Add Functionaly for 2 Level's of Access:
 
 ### 2. Users:
 
-#### Look Up Movies:
+- [x] #### Look Up Movies:
 
-- Input: List of movie id's (/movies?id=1,2,3)
-- Action: Return All from Movie DB for provided IDs
-- Output: List of Movie Titles and Year for Each ID.
+- [x] - Input: List of movie id's or titles (/movies?id=1,2,3)
+- [x] - Action: Return All from Movie DB for provided IDs/Titles.
+- [x] - Output: List of Movie Titles and Year for Each ID/TItle.
 
 #### Look Up Screenings:
 
