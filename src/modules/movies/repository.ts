@@ -6,4 +6,7 @@ export default (db: Database) => ({
 
   findByIds: async (ids: number[]) =>
     db.selectFrom('movies').selectAll().where('id', 'in', ids).execute(),
+
+  findByTitle: async (titles: string[]) =>
+    db.selectFrom('movies').selectAll().where('title', 'in', titles).execute(),
 })

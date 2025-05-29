@@ -6,6 +6,10 @@ const db = await createTestDatabase()
 const repository = buildRepository(db)
 const createMovies = createFor(db, 'movies')
 
+afterEach(async () => {
+  await db.deleteFrom('movies').execute()
+})
+
 describe('findAll', () => {
   it('should return existing movies', async () => {
     // directly create movies in the database
@@ -27,7 +31,9 @@ describe('findAll', () => {
       },
     ])
   })
+})
 
+describe('findByIds', () => {
   it('should return a list of movies by their ID', async () => {
     // directly create movies in the database
     await createMovies([
@@ -52,6 +58,47 @@ describe('findAll', () => {
     const movies = await repository.findByIds([234, 4153])
 
     // expect to have only the selected movies
+    expect(movies).toHaveLength(2)
+    expect(movies).toEqual([
+      {
+        id: 234,
+        title: 'Sherlock Holmes',
+        year: 2009,
+      },
+      {
+        id: 4153,
+        title: 'Inception',
+        year: 2010,
+      },
+    ])
+  })
+})
+
+describe('findByTitle', () => {
+  it('should return a list of movies by their Title', async () => {
+    await createMovies([
+      {
+        id: 22,
+        title: 'The Dark Knight',
+        year: 2008,
+      },
+      {
+        id: 234,
+        title: 'Sherlock Holmes',
+        year: 2009,
+      },
+      {
+        id: 4153,
+        title: 'Inception',
+        year: 2010,
+      },
+    ])
+
+    const movies = await repository.findByTitle([
+      'Inception',
+      'Sherlock Holmes',
+    ])
+
     expect(movies).toHaveLength(2)
     expect(movies).toEqual([
       {
