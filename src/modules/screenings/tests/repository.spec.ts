@@ -49,7 +49,7 @@ describe('createNew', async () => {
 })
 
 describe('findAll', () => {
-  it('should a list of all screenings ', async () => {
+  it('should a list of all screenings with movie title and year', async () => {
     await createMovies([
       {
         id: 1,
@@ -66,7 +66,10 @@ describe('findAll', () => {
     expect(await repository.findAll()).toEqual([
       {
         id: expect.any(Number),
-        ...screening,
+        seats: screening.seats,
+        date: screening.date,
+        title: 'Sherlock Holmes',
+        year: 2009,
       },
     ])
   })
@@ -76,5 +79,37 @@ describe('findAll', () => {
     await fillScreenings(db)
 
     expect(await repository.findAll()).toHaveLength(10)
+  })
+})
+
+describe('findByIds', () => {
+  it('should return a list of queried ids', async () => {
+    await fillMovies(db)
+    await fillScreenings(db)
+
+    const screenings = await repository.findByIds([1, 5, 10])
+
+    expect(screenings).toHaveLength(3)
+    expect(screenings).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ id: 1 }),
+        expect.objectContaining({ id: 5 }),
+        expect.objectContaining({ id: 10 }),
+      ])
+    )
+  })
+})
+
+describe('findByMovieIds', () => {
+  it('should return a list of screenings with the queries movie ids', async () => {
+    await fillMovies(db)
+    await fillScreenings(db)
+
+    const screenings = await repository.findByMovieIds([10])
+
+    expect(
+      screenings.every((screening) => screening.title === 'Wall-E')
+    ).toBeTruthy()
+    expect(screenings).toHaveLength(4)
   })
 })
