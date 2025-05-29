@@ -27,7 +27,7 @@ Add Functionaly for 2 Level's of Access:
 
 ### 2. Users:
 
-- [x] #### Look Up Movies:
+#### Look Up Movies:
 
 - [x] - Input: List of movie id's or titles (/movies?id=1,2,3)
 - [x] - Action: Return All from Movie DB for provided IDs/Titles.
@@ -35,9 +35,9 @@ Add Functionaly for 2 Level's of Access:
 
 #### Look Up Screenings:
 
-- Input: None/ID
-- Action: Return Lists from Screening Table
-- Output: List of Screenings with Movie Title, Year, Time, Tickets, Tickets Left/Reserved
+- [x] - Input: None/ID/MovieId
+- [x] - Action: Return Lists from Screening Table
+- Output: List of Screenings with ~Movie Title, Year, Time, Tickets,~ Tickets Left/Reserved--Reserved Count To Be Added
 
 #### Reserve Ticket:
 
