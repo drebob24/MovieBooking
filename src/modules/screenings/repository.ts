@@ -12,4 +12,6 @@ export default (db: Database) => ({
       .values(screening)
       .returningAll()
       .executeTakeFirst(),
+
+  findAll: () => db.selectFrom('screenings').selectAll().limit(10).execute(),
 })

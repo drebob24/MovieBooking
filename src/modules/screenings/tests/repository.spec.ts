@@ -1,6 +1,7 @@
 import createTestDatabase from '@tests/utils/createTestDatabase'
 import { createFor } from '@tests/utils/records'
 import buildRepository from '../repository'
+import { fillMovies, fillScreenings, tomorrowDate } from './utils'
 
 const db = await createTestDatabase()
 const repository = buildRepository(db)
@@ -9,8 +10,8 @@ const createMovies = createFor(db, 'movies')
 afterAll(() => db.destroy())
 
 afterEach(async () => {
-  // clearing the tested table after each test
   await db.deleteFrom('screenings').execute()
+  await db.deleteFrom('movies').execute()
 })
 
 describe('createNew', async () => {
@@ -44,5 +45,36 @@ describe('createNew', async () => {
     }
 
     expect(repository.createNew(screening)).rejects.toThrow()
+  })
+})
+
+describe('findAll', () => {
+  it('should a list of all screenings ', async () => {
+    await createMovies([
+      {
+        id: 1,
+        title: 'Sherlock Holmes',
+        year: 2009,
+      },
+    ])
+    const screening = {
+      movieId: 1,
+      seats: 100,
+      date: tomorrowDate,
+    }
+    repository.createNew(screening)
+    expect(await repository.findAll()).toEqual([
+      {
+        id: expect.any(Number),
+        ...screening,
+      },
+    ])
+  })
+
+  it('should return a max of 10 screenings', async () => {
+    await fillMovies(db)
+    await fillScreenings(db)
+
+    expect(await repository.findAll()).toHaveLength(10)
   })
 })
