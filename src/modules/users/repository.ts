@@ -14,13 +14,19 @@ export default (db: Database) => ({
   findByIds: (ids: number[]) =>
     db.selectFrom('users').selectAll().where('users.id', 'in', ids).execute(),
 
+  findByUsername: (username: string) =>
+    db
+      .selectFrom('users')
+      .selectAll()
+      .where('users.username', '=', username)
+      .execute(),
+
   deleteUser: async (id: number) => {
     const result = await db
       .deleteFrom('users')
       .where('users.id', '=', id)
       .execute()
 
-    // Check if a row was actually deleted
     if (result[0]?.numDeletedRows === 0n) {
       throw new Error(`User with ID ${id} not found`)
     }

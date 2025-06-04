@@ -151,16 +151,28 @@ describe('deleteUser', () => {
   })
 })
 
-// describe('findByMovieIds', () => {
-//   it('should return a list of screenings with the queries movie ids', async () => {
-//     await fillMovies(db)
-//     await fillScreenings(db)
+describe('findByUsername', () => {
+  it('should return a user with the matching username', async () => {
+    await createUsers([
+      {
+        id: 1,
+        username: 'JoeMovie',
+        password: 'password123',
+      },
+      {
+        id: 2,
+        username: 'Bob123',
+        password: 'notpassword',
+      },
+      {
+        id: 3,
+        username: 'JustKeanu',
+        password: 'sadKeanu12',
+      },
+    ])
+    const username = 'Bob123'
 
-//     const screenings = await repository.findByMovieIds([10])
-
-//     expect(
-//       screenings.every((screening) => screening.title === 'Wall-E')
-//     ).toBeTruthy()
-//     expect(screenings).toHaveLength(4)
-//   })
-// })
+    const [user] = await repository.findByUsername(username)
+    expect(user.id).toEqual(2)
+  })
+})
